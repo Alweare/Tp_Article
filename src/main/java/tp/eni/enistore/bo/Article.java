@@ -1,12 +1,17 @@
 package tp.eni.enistore.bo;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "articles")
 public class Article {
-    public long id;
+    @Id
+    public String id;
     public String title;
 
     public Article() {
     }
-    public Article(long id, String title) {
+    public Article(String id, String title) {
         this.id = id;
         this.title = title;
     }

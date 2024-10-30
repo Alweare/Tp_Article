@@ -12,8 +12,8 @@ public class ResponseService <T> {
 
 
 
-    public static <T> ResponseService buildResponse(String code, String message, T data) {
-        ResponseService res = new ResponseService();
+    public static <T> ResponseService <T> buildResponse(String code, String message, T data) {
+        ResponseService<T> res = new ResponseService<>();
         res.code = code;
         res.message = message;
         res.data = data;

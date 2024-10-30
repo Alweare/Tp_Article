@@ -3,80 +3,75 @@ package tp.eni.enistore.bll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tp.eni.enistore.bo.Article;
+import tp.eni.enistore.dal.IDAOArticle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ArticleService {
     @Autowired
     ResponseService responseService;
 
-
-List<Article> articles = new ArrayList<Article>();
-    Article article1 = new Article(1L, "brosse a dent");
-    Article article2 = new Article(2L, "épingle a cheveux");
-    Article article3 = new Article(3L, "morissette");
-    Article article4 = new Article(4L, "un pneu");
-
-    public ArticleService(List<Article> articles) {
-        this.articles = articles;
-        articles.add(article1);
-        articles.add(article2);
-        articles.add(article3);
-        articles.add(article4);
-
-    }
+    @Autowired
+    IDAOArticle articleDAO;
 
 
-
-    public ResponseService getArticlesAll() {
-        if(articles.isEmpty()){
-            return responseService.buildResponse("703", " y a pas d'article", null);
+    public ResponseService<List<Article>> getArticlesAll() {
+        List<Article> foundArticle =  articleDAO.findAll();
+        if(foundArticle.isEmpty()){
+            return ResponseService.buildResponse("703", " y a pas d'article", null);
         }
 
-        return responseService.buildResponse("202", "Voici vos articles ! ", articles);
+        return ResponseService.buildResponse("202", "Voici vos articles ! ", foundArticle);
     }
 
-    public ResponseService getArticleById(long id) {
-        Article articleById = articles.stream().filter(c -> c.id == id).findFirst().orElse(null);
+    public ResponseService<Article> getArticleById(String id) {
+
+        Article articleById = articleDAO.findById(id);
 
         if(articleById == null){
-            return responseService.buildResponse("703", " y a pas d'article", null);
+            return ResponseService.buildResponse("703", " y a pas d'article", null);
         }
-
 
 //        if(articleById == null){
 //            return responseService.buildResponse("703", " y a pas d'article", null);
-//        }
-
-        return responseService.buildResponse("202", "Voici l'article ! ", articleById);
+//       }
+        return ResponseService.buildResponse("202", "Voici l'article ! ", articleById);
     }
 
-    public ResponseService deleteById(Long id){
-        Article articleADelete = articles.stream().filter(c -> c.id == id).findFirst().orElse(null);
+    public ResponseService<Article> deleteById(String id){
+        Article articleADelete = articleDAO.findById(id);
         if(articleADelete == null){
-            responseService.buildResponse("703", " y a pas d'article", null);
+            ResponseService.buildResponse("703", " y a pas d'article", null);
 
         }
-        articles.remove(articleADelete);
+        articleDAO.delete(articleADelete);
 
-        return responseService.buildResponse("202", "article delete", articleADelete);
+        return ResponseService.buildResponse("202", "article delete", articleADelete);
 
 
     }
 
-    public ResponseService save(Article article) {
-        Article articleASave = articles.stream().filter(c -> c.id == article.id).findFirst().orElse(null);
-        if (articleASave != null) {
-            articleASave.title = article.title;
-            return responseService.buildResponse("202", " article update", articleASave);
+    public ResponseService<Article> save(Article article) {
+        Article articleTitle = articleDAO.findByTitle(article.title);
+        boolean articleIsNew= article.id == null || articleDAO.findById(article.id) == null;
+
+
+
+        if(articleTitle != null && articleIsNew){
+            return ResponseService.buildResponse("701", " le titre existe déjà", article);
         }
 
-        articles.add(articleASave);
+        if (!articleIsNew && articleTitle != null && articleTitle.id.equals(article.id)) {
 
+                    return ResponseService.buildResponse("202", " article update", article);
+        }
 
-        return responseService.buildResponse("202", " articel sauvegarder", null);
+        articleDAO.save(article);
+
+        return ResponseService.buildResponse("202", " articel sauvegarder", null);
 
     }
 
