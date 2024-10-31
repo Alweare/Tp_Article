@@ -1,9 +1,9 @@
-package tp.eni.enistore.bll;
+package tp.eni.enistore.article.bll;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tp.eni.enistore.bo.Article;
-import tp.eni.enistore.dal.IDAOArticle;
+import tp.eni.enistore.article.bo.Article;
+import tp.eni.enistore.article.dal.IDAOArticle;
 
 import java.util.ArrayList;
 import java.util.List;

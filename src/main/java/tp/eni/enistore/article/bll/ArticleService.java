@@ -1,17 +1,12 @@
-package tp.eni.enistore.bll;
+package tp.eni.enistore.article.bll;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import tp.eni.enistore.bo.Article;
+import tp.eni.enistore.article.bo.Article;
 import tp.eni.enistore.config.MessageHelper;
-import tp.eni.enistore.dal.IDAOArticle;
+import tp.eni.enistore.article.dal.IDAOArticle;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 @Service

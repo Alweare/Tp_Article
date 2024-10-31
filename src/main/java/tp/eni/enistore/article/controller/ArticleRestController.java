@@ -1,25 +1,24 @@
-package tp.eni.enistore.controller;
+package tp.eni.enistore.article.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tp.eni.enistore.bll.ArticleService;
-import tp.eni.enistore.bll.ResponseService;
-import tp.eni.enistore.bo.Article;
+import tp.eni.enistore.article.bll.ArticleService;
+import tp.eni.enistore.article.bll.ResponseService;
+import tp.eni.enistore.article.bo.Article;
 
 import java.util.List;
 
 
 @RestController
-@Api(tags = "Articles")
+
 public class ArticleRestController {
 
     @Autowired
     ArticleService articleService;
 
     @GetMapping("/get-all")
-    @ApiOperation(value = "Récupérer tous les articles", response = List.class)
+
     public ResponseService<List<Article>> getAll() {
 
         return articleService.getArticlesAll();

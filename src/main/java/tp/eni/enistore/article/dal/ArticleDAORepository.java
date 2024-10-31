@@ -1,9 +1,9 @@
-package tp.eni.enistore.dal;
+package tp.eni.enistore.article.dal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import tp.eni.enistore.bo.Article;
+import tp.eni.enistore.article.bo.Article;
 
 import java.util.List;
 @Profile("jpa")

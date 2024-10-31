@@ -1,4 +1,4 @@
-package tp.eni.enistore.bo;
+package tp.eni.enistore.article.bo;
 
 
 import jakarta.persistence.Entity;

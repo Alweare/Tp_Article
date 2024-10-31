@@ -1,6 +1,6 @@
-package tp.eni.enistore.dal;
+package tp.eni.enistore.article.dal;
 
-import tp.eni.enistore.bo.Article;
+import tp.eni.enistore.article.bo.Article;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package tp.eni.enistore.bll;
+package tp.eni.enistore.article.bll;
 
 import org.springframework.stereotype.Service;
-import tp.eni.enistore.bo.Article;
 
 @Service
 public class ResponseService <T> {
