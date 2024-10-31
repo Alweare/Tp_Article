@@ -6,20 +6,20 @@ import org.springframework.stereotype.Repository;
 import tp.eni.enistore.bo.Article;
 
 import java.util.List;
-@Profile("mongodb")
+@Profile("jpa")
 @Repository
 public class ArticleDAORepository implements IDAOArticle{
     @Autowired
-    MonRepo monRepo;
+    MySQLRepo monRepo;
 
     @Override
-    public Article findById(String id) {
+    public Article findById(Long id) {
         return monRepo.findById(id).orElse(null);
     }
 
     @Override
-    public Article findByTitle(String title) {
-        return monRepo.findByTitle(title);
+    public Article findFirstByTitle(String title) {
+        return monRepo.findFirstByTitle(title);
     }
 
     @Override

@@ -1,4 +1,8 @@
 package tp.eni.enistore.dal;
 
-public class MySQLRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tp.eni.enistore.bo.Article;
+
+public interface MySQLRepo extends JpaRepository<Article, Long> {
+    public Article findFirstByTitle(String title);
 }

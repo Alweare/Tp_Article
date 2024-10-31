@@ -1,19 +1,38 @@
 package tp.eni.enistore.bo;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "articles")
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Primary;
+import org.springframework.validation.annotation.Validated;
+
+@Entity
+@Validated
 public class Article {
+
     @Id
-    public String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long id;
+    @NotBlank(message="il faut un titre")
     public String title;
 
     public Article() {
     }
-    public Article(String id, String title) {
+    public Article(Long id, String title) {
         this.id = id;
         this.title = title;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

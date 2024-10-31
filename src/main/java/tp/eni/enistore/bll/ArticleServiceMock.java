@@ -19,10 +19,10 @@ public class ArticleServiceMock {
 
 
 List<Article> articles = new ArrayList<Article>();
-    Article article1 = new Article("1", "brosse a dent");
-    Article article2 = new Article("2", "épingle a cheveux");
-    Article article3 = new Article("3" ,"morissette");
-    Article article4 = new Article("4", "un pneu");
+    Article article1 = new Article(1L, "brosse a dent");
+    Article article2 = new Article(2L, "épingle a cheveux");
+    Article article3 = new Article(3L ,"morissette");
+    Article article4 = new Article(4L, "un pneu");
 
     public ArticleServiceMock(List<Article> articles) {
         this.articles = articles;
@@ -44,9 +44,9 @@ List<Article> articles = new ArrayList<Article>();
         return responseService.buildResponse("202", "Voici vos articles ! ", articles);
     }
 
-    public ResponseService getArticleById(String id) {
+    public ResponseService getArticleById(Long id) {
 
-        Article articleById = articles.stream().filter(c -> Objects.equals(c.id, id)).findFirst().orElse(null);
+        Article articleById = articles.stream().filter(c -> c.id ==  id).findFirst().orElse(null);
 
         if(articleById == null){
             return responseService.buildResponse("703", " y a pas d'article", null);
